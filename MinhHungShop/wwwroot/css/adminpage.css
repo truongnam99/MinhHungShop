@@ -1,0 +1,29 @@
+﻿.menu{
+    background: #888;
+}
+
+.menu-item {
+    font-size: 25px;
+    margin: 16px;
+    color: #ffffff;
+    padding: 16px;
+    background: #1D4380;
+    border-radius:8px;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.menu-icon{
+    width:48px;
+    height: 48px;
+}
+
+.mg-l-32{
+    margin-left:32px;
+}
+.mg-l-16{
+    margin-left:16px;
+}

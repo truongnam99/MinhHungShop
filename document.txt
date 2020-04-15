@@ -1,0 +1,3 @@
+- Yêu cầu: phải biết mô hình MVC(Model- View- Controller)
+- Thiết kế layout trang admin: thiết kế trong file index.cshtml tại thư mục Views/Admin.
+- Thiết kế layout trang web: trong file index.cshtml tại thư mục view/Home

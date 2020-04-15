@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/adminpage.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -28,19 +29,22 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MinhHungShop</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container col-md-3 menu sitebar">
+        <div class="menu-item" style="margin-top:24px; font-size:28px; text-align:center">Bảng điều khiển</div>
+        <div class="menu-item" style="margin-top:24px"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg">Tổng quan</a></div>
+        <div class="menu-item"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg"> Sản phẩm</a></div>
+        <div class="menu-item"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg"> Khách hàng</a></div>
+        <div class="menu-item"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg"> Đơn hàng</a></div>
+        <div class="menu-item"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg"> Báo cáo</a></div>
+        <div class="menu-item"><a class="mg-l-32" href="#"><img width="40" height="40" src="~/images/customer.svg"> Trợ giúp</a></div>
+    </div>
+
+    <div class="container col-md-9 body-content">
         @RenderBody()
         <hr />
         <footer>
