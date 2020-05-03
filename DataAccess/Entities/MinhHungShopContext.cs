@@ -15,11 +15,11 @@ namespace DataAccess.Entities
         {
         }
 
-        public virtual DbSet<About> About { get; set; }
-        public virtual DbSet<Contact> Contact { get; set; }
+       
+       
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Feedback> Feedback { get; set; }
-        public virtual DbSet<Footer> Footer { get; set; }
+  
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<MenuType> MenuType { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
@@ -43,45 +43,8 @@ namespace DataAccess.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<About>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
+            
 
-                entity.Property(e => e.CreatedBy)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Detail).HasColumnType("ntext");
-
-                entity.Property(e => e.Image)
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.MetaTitle)
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ModifiedBy)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Name).HasMaxLength(250);
-            });
-
-            modelBuilder.Entity<Contact>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Content)
-                    .IsRequired()
-                    .HasColumnType("ntext");
-            });
 
             modelBuilder.Entity<Customer>(entity =>
             {
@@ -126,17 +89,7 @@ namespace DataAccess.Entities
                     .HasConstraintName("FK_Feedback_Customer");
             });
 
-            modelBuilder.Entity<Footer>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Content).HasColumnType("ntext");
-            });
-
+          
             modelBuilder.Entity<Menu>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
