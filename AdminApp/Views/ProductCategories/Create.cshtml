@@ -1,0 +1,56 @@
+﻿@model DataAccess.Entities.ProductCategory
+@{
+    Layout = "Categorys/_Layout";
+}
+@{
+
+}
+<div class="row">
+    <div class="col-md-12">
+        @{
+            if (ViewBag.Status == Utils.Status.Success)
+            {
+                <div class="alert alert-success" role="alert">Thành công</div>
+            }
+            else if (ViewBag.Status == Utils.Status.Failed)
+            {
+                <div class="alert alert-danger" role="alert">Thất bại</div>
+            }
+        }
+        <form asp-action="Create">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Name" class="control-label">Tên danh mục*</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="MetaTitle" class="control-label">Tiêu đề trên web</label>
+                    <input asp-for="MetaTitle" class="form-control" />
+                    <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="DisplayOrder" class="control-label">Vị trí hiển thị</label>
+                    <input asp-for="DisplayOrder" class="form-control" />
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="ShowOnHome" class="control-label">Hiển thị</label>
+                    <input asp-for="ShowOnHome" class="form-control" />
+                    <span asp-validation-for="ShowOnHome" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

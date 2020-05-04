@@ -1,0 +1,51 @@
+﻿@using DataAccess.Entities
+@{
+    Layout = "Producers/_layout";
+    ViewData["Title"] = "Home Page";
+    List<Producer> producers = ViewBag.producers;
+}
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-fill mr-1"></i>Danh sách nhà cung cấp</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">
+                        <a asp-action="Create" class="btn btn-primary">
+                            <i class="far fa-plus-square"></i> <span>Thêm</span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < producers.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@producers.ElementAt(i).Name</td>
+                            <td>@producers.ElementAt(i).Description</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@producers.ElementAt(i).Id" class="text-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>  |
+                                <a asp-action="Details" asp-route-id="@producers.ElementAt(i).Id" class="text-info">
+                                    <i class="fas fa-info"></i>
+                                </a>  |
+                                <a asp-action="Delete" asp-route-id="@producers.ElementAt(i).Id" class="text-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>

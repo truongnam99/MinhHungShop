@@ -24,14 +24,7 @@ namespace AdminApp.Controllers
 
         public async Task<IActionResult> Add(Utils.Status? status)
         {
-            if (status == Utils.Status.Success)
-            {
-                ViewBag.Status = "Thanh cong";
-            }
-            else if(status == Utils.Status.Failed)
-            {
-                ViewBag.Status = "That bai";
-            }
+            ViewBag.Status = status;
             return View(new Product());
         }
         

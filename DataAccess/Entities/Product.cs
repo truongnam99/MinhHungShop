@@ -12,7 +12,7 @@ namespace DataAccess.Entities
         }
 
         public long Id { get; set; } // auto create
-        [Required(ErrorMessage ="Trường này không được bỏ trống")]
+        [Required(ErrorMessage ="Trường này không được bỏ trống")] 
         public string Name { get; set; }
         public string Code { get; set; } // auto create
         public string CodeColor { get; set; } // pick color and genarate hex code

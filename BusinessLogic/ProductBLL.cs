@@ -47,7 +47,20 @@ namespace BusinessLogic
         public async Task<List<Product>> GetProducts()
         {
             List<Product> products = await dBContext.Product.ToListAsync();
+
             return products;
+        }
+
+        public async Task<List<Product>> GetTop()
+        {
+            List<Product> top = await dBContext.Product.FromSql("exec sp_SelectTopProduct").ToListAsync();
+            return top;
+        }
+
+        public async Task<List<Product>> GetProductByCategory(long id)
+        {
+            //List<Product> products = await dBContext.Product.FindAsync()
+            return null;
         }
 
         public Product GetProduct(long id)

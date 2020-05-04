@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Entities
 {
@@ -11,6 +12,7 @@ namespace DataAccess.Entities
         }
 
         public long Id { get; set; }
+        [Required(ErrorMessage ="Trường này không được bỏ trống")]
         public string Name { get; set; }
         public string Logo { get; set; }
         public string Description { get; set; }
