@@ -15,20 +15,6 @@ namespace AdminApp.Controllers
     {
         public IActionResult Index()
         {
-            UserBLL userBLL = UserBLL.getIns();
-            DbSet<User> users = userBLL.GetAll();
-            
-            userBLL.Update(new User()
-            {
-                Username = "abc",
-                Password = "cba",
-                Name = "abc cba cde"
-            });
-            foreach (User user in users)
-            {
-                Console.Write(user.Username + ":" + user.Password);
-            }
-            
             return View();
         }
 
