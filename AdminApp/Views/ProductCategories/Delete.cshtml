@@ -1,0 +1,26 @@
+﻿@using DataAccess.Entities
+@{
+    Layout = "Categorys/_layout";
+    ProductCategory productCategory = ViewBag.ProductCategory;
+}
+
+<div class="block">
+    <div class="ml-4">
+        <h3>Bạn chắn chắn muốn xóa sản phẩm</h3>
+        <div>Tên: @productCategory.Name</div>
+        <div>Tiêu đề trên web: @productCategory.MetaTitle</div>
+        <div>Vị trí hiển thị: @productCategory.DisplayOrder</div>
+        <div>Hiện thị trên web: @productCategory.ShowOnHome</div>
+    </div>
+    <form asp-action="Delete">
+        <div class="form-row col-md-4">
+            <div class="form-group col-md-6">
+                <input type="hidden" value="@productCategory.Id" />
+                <input type="submit" value="Delete" class="btn btn-primary btn-block" />
+            </div>
+            <div class="form-group col-md-6">
+                <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
