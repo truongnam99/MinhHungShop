@@ -1,3 +1,5 @@
+CREATE DATABASE MinhHungShop
+Go
 USE [MinhHungShop]
 GO
 /****** Object:  Table [dbo].[About]    Script Date: 4/25/2020 2:02:31 PM ******/
