@@ -22,15 +22,32 @@ namespace WebApp.Controllers
             ProductBLL productBLL = ProductBLL.getIns();
             //var mytask = productBLL.Add(pr);
             List<Product> products = await productBLL.GetTop();
-            ListProduct list = new ListProduct();
-            foreach (Product pro in products)
-            {
-                list.products.Add(pro);
-            }
-           // list.products.Add(pr);
+            List<ProductCategory> categories = await productBLL.GetCategory();
+            ListProAndCate list = new ListProAndCate();
+            list.products = products;
+            list.categories = categories;
+            //foreach (Product pro in products)
+            //{
+            //    list.products.Add(pro);
+            //}
+            //foreach (ProductCategory cate in categories)
+            //{
+            //    list.categories.Add(cate);
+            //}
+            // list.products.Add(pr);
             return View(list);
         }
-
+        
+        public async Task<IActionResult> Category(long id)
+        {
+            ProductBLL productBLL = ProductBLL.getIns();
+            List<Product> products = await productBLL.GetProductByCategory(id);
+            List<ProductCategory> categories = await productBLL.GetCategory();
+            ListProAndCate list = new ListProAndCate();
+            list.products = products;
+            list.categories = categories;
+            return View(list);
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

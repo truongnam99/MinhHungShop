@@ -67,5 +67,9 @@ namespace BusinessLogic
         {
             return dBContext.Product.Find(id);
         }
+        public async Task<List<ProductCategory>> GetCategory()
+        {
+            return null;
+        }
     }
 }
