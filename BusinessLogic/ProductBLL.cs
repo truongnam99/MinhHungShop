@@ -51,6 +51,30 @@ namespace BusinessLogic
             return products;
         }
 
+        public async Task<Utils.Status> Update(Product product)
+        {
+            try
+            {
+                Product iProduct = GetProduct(product.Id);
+                iProduct.Producer = product.Producer;
+                iProduct.Category = product.Category;
+                iProduct.Name = product.Name;
+                iProduct.Price = product.Price;
+                iProduct.ProducerId = product.ProducerId;
+                iProduct.CategoryId = product.CategoryId;
+                iProduct.Image = product.Image;
+                iProduct.Description = product.Description;
+                iProduct.Detail = product.Detail;
+                dBContext.Product.Update(iProduct);
+                await dBContext.SaveChangesAsync();
+                return Utils.Status.Success;
+            }
+            catch (Exception e)
+            {
+                return Utils.Status.Failed;
+            }
+        }
+
         public async Task<List<Product>> GetTop()
         {
             List<Product> top = await dBContext.Product.FromSql("exec sp_SelectTopProduct").ToListAsync();
@@ -63,7 +87,7 @@ namespace BusinessLogic
             return null;
         }
 
-        public Product GetProduct(long id)
+        public Product GetProduct(long? id)
         {
             return dBContext.Product.Find(id);
         }

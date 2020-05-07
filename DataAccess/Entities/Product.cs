@@ -12,14 +12,14 @@ namespace DataAccess.Entities
         }
 
         public long Id { get; set; } // auto create
-        [Required(ErrorMessage ="Trường này không được bỏ trống")] 
+        [Required(ErrorMessage = "Trường này không được bỏ trống")]
         public string Name { get; set; }
         public string Code { get; set; } // auto create
         public string CodeColor { get; set; } // pick color and genarate hex code
         public string MetaTitle { get; set; } // auto set with name
         [Required(ErrorMessage = "Trường này không được bỏ trống")]
         public string Description { get; set; }  // shot description
-        [Required(ErrorMessage = "Trường này không được bỏ trống")]
+        //[Required(ErrorMessage = "Trường này không được bỏ trống")]
         public string Image { get; set; } // a box for upload image or chose link
         public string MoreImages { get; set; } // skip
         [Required(ErrorMessage = "Trường này không được bỏ trống")]

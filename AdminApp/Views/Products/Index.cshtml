@@ -3,6 +3,7 @@
     Layout="Products/_layout";
     ViewData["Title"] = "Home Page";
     List<Product> products = ViewBag.Products;
+    
 }
 
 <div class="card mb-4">
@@ -17,7 +18,7 @@
                     <th scope="col">Nhà cung cấp</th>
                     <th scope="col">Loại sơn</th>
                     <th scope="col">
-                        <a asp-action="Add" class="btn btn-primary">
+                        <a asp-action="Create" class="btn btn-primary">
                             <i class="far fa-plus-square"></i> <span>Thêm</span>
                         </a>
                     </th>
@@ -31,8 +32,8 @@
                     <th scope="row">@(i + 1)</th>
                     <td>@products.ElementAt(i).Name</td>
                     <td>@products.ElementAt(i).Price</td>
-                    <td>@products.ElementAt(i).Name</td>
-                    <td>@products.ElementAt(i).Name</td>
+                    <td>@products.ElementAt(i).Producer.Name</td>
+                    <td>@products.ElementAt(i).Producer.Name</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@products.ElementAt(i).Id" class="text-warning">
                             <i class="fas fa-edit"></i>

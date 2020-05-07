@@ -20,8 +20,9 @@ namespace AdminApp.Controllers
         }
 
         // GET: ProductCategories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Utils.Status? status)
         {
+            ViewBag.Status = status;
             ViewBag.ProductCategories = await ProductCategoryBLL.getIns().GetProductCategories();
             return View();
         }
@@ -67,7 +68,7 @@ namespace AdminApp.Controllers
         }
 
         // GET: ProductCategories/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public async Task<IActionResult> Edit(long? id, Utils.Status? status)
         {
             if (id == null)
             {
@@ -79,6 +80,7 @@ namespace AdminApp.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Status = status;
             return View(productCategory);
         }
 
@@ -128,8 +130,8 @@ namespace AdminApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            await ProductCategoryBLL.getIns().Delete(id);
-            return RedirectToAction(nameof(Index));
+            Utils.Status status = await ProductCategoryBLL.getIns().Delete(id);
+            return RedirectToAction("Index", new { status = status});
         }
 
         private bool ProductCategoryExists(long id)

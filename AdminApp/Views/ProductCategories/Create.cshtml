@@ -38,7 +38,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="ShowOnHome" class="control-label">Hiển thị</label>
-                    <input asp-for="ShowOnHome" class="form-control" />
+                    <select asp-for="ShowOnHome" class="form-control">
+                        <option value="true">Hiển thị</option>
+                        <option value="false">Ẩn</option>
+                    </select>
                     <span asp-validation-for="ShowOnHome" class="text-danger"></span>
                 </div>
             </div>

@@ -5,6 +5,16 @@
     List<Producer> producers = ViewBag.producers;
 }
 
+@{
+    if (ViewBag.Status == Utils.Status.Success)
+    {
+        <div class="alert alert-success" role="alert">Thành công</div>
+    }
+    else if (ViewBag.Status == Utils.Status.Failed)
+    {
+        <div class="alert alert-danger" role="alert">Thất bại</div>
+    }
+}
 <div class="card mb-4">
     <div class="card-header"><i class="fas fa-fill mr-1"></i>Danh sách nhà cung cấp</div>
     <div class="card-body">
@@ -32,9 +42,6 @@
                             <td>
                                 <a asp-action="Edit" asp-route-id="@producers.ElementAt(i).Id" class="text-warning">
                                     <i class="fas fa-edit"></i>
-                                </a>  |
-                                <a asp-action="Details" asp-route-id="@producers.ElementAt(i).Id" class="text-info">
-                                    <i class="fas fa-info"></i>
                                 </a>  |
                                 <a asp-action="Delete" asp-route-id="@producers.ElementAt(i).Id" class="text-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i>

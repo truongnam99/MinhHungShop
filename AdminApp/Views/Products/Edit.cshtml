@@ -1,0 +1,84 @@
+﻿@model DataAccess.Entities.Product
+@using DataAccess.Entities
+@{
+    Layout = "Products/_Layout";
+    List<Producer> producers = ViewBag.Producers;
+    List<ProductCategory> productCategories = ViewBag.ProductCategories;
+}
+<div class="row">
+    <div class="col-md-12">
+        @{
+            if (ViewBag.Status == Utils.Status.Success)
+            {
+                <div class="alert alert-success" role="alert">@ViewBag.Status</div>
+            }
+            else if (ViewBag.Status == Utils.Status.Failed)
+            {
+                <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
+            }
+        }
+                <form asp-action="Edit">
+                    <div class="form-row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group col-md-6">
+                            <label asp-for="Name" class="control-label">Tên</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Price" class="control-label">Giá</label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="ProducerId" class="control-label">Nhà cung cấp</label>
+                            <select asp-for="ProducerId" class="form-control">
+                                @foreach (var item in producers)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ProducerId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="CategoryId" class="control-label">Danh mục</label>
+                            <select asp-for="CategoryId" class="form-control">
+                                @foreach (var item in productCategories)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label">Hình ảnh</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01">
+                            <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label">Mô tả</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Detail" class="control-label">Mô tả chi tiết</label>
+                        <input asp-for="Detail" class="form-control" />
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                        </div>
+                    </div>
+                </form>
+    </div>
+</div>
