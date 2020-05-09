@@ -1,4 +1,6 @@
-﻿@model WebApp.Models.ListProAndCate
+﻿@*@model PagedList.IPagedList<WebApp.Models.ListProAndCate>*@
+@model WebApp.Models.ListProAndCate
+@using PagedList.Mvc;
 @{
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_Layoutweb.cshtml";
@@ -19,10 +21,10 @@
         {
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <a href="@Url.Action("Index", "Product", new { id = Model.products[i].Id })"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">@Model.products[i].Name</a>
+                            <a href="@Url.Action("Index", "Product", new { id = Model.products[i].Id })">@Model.products[i].Name</a>
                         </h4>
                         <h5>@Model.products[i].Price VNĐ</h5>
                         <p class="card-text">@Model.products[i].Description</p>
@@ -37,5 +39,5 @@
 
     </div>
 </div>
-<h2>Category</h2>
+
 

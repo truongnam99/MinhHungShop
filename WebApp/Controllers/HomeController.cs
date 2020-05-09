@@ -7,11 +7,15 @@ using BusinessLogic;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
+       
+        
         public async Task<IActionResult> Index()
         {
             //Product pr = new Product();
@@ -23,6 +27,8 @@ namespace WebApp.Controllers
             //var mytask = productBLL.Add(pr);
             List<Product> products = await productBLL.GetTop();
             List<ProductCategory> categories = await productBLL.GetCategory();
+            //Categories categories = new Categories();
+            //categories.categories = await productBLL.GetCategory();
             ListProAndCate list = new ListProAndCate();
             list.products = products;
             list.categories = categories;
@@ -42,10 +48,14 @@ namespace WebApp.Controllers
         {
             ProductBLL productBLL = ProductBLL.getIns();
             List<Product> products = await productBLL.GetProductByCategory(id);
+            products.OrderByDescending(x => x.ViewCount).ToPagedList(1, 10);
             List<ProductCategory> categories = await productBLL.GetCategory();
+            //Categories categories = new Categories();
+            //categories.categories = await productBLL.GetCategory();
             ListProAndCate list = new ListProAndCate();
             list.products = products;
             list.categories = categories;
+            
             return View(list);
         }
         public IActionResult About()
