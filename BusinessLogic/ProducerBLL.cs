@@ -9,7 +9,7 @@ namespace BusinessLogic
 {
     public class ProducerBLL
     {
-        DBContextIns _context = DBContextIns.getIns();
+        MinhHungShopContext _context = new MinhHungShopContext();
         private static ProducerBLL Ins;
 
         private ProducerBLL()

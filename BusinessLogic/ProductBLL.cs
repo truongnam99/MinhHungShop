@@ -10,7 +10,7 @@ namespace BusinessLogic
 {
     public class ProductBLL
     {
-        DBContextIns dBContext = DBContextIns.getIns();
+        MinhHungShopContext dBContext = new MinhHungShopContext();
         private static ProductBLL Ins;
 
         private ProductBLL()
