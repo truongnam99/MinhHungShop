@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model WebApp.Models.ListProAndCate
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -43,9 +44,16 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            
-           
-                @RenderBody()
+            @*<div class="col-lg-3">
+                <h1 class="my-4">Minh Hùng Shop</h1>
+                <div class="list-group">
+                    @for (int i = 0; i < Model.categories.Count; i++)
+                    {
+                        <a href="@Url.Action("Category", "Home", new { id = Model.categories[i].Id })" class="list-group-item">@Model.categories[i].Name</a>
+                    }
+                </div>
+            </div>*@
+            @RenderBody()
             <!-- /.col-lg-9 -->
         </div>
         <!-- /.row -->

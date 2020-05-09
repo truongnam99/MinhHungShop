@@ -1,0 +1,43 @@
+﻿@*@model PagedList.IPagedList<WebApp.Models.ListProAndCate>*@
+@model WebApp.Models.ListProAndCate
+@using PagedList.Mvc;
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_Layoutweb.cshtml";
+}
+<div class="col-lg-3">
+    <h1 class="my-4">Minh Hùng Shop</h1>
+    <div class="list-group">
+        @for (int i = 0; i < Model.categories.Count; i++)
+        {
+            <a href="@Url.Action("Category", "Home", new { id = Model.categories[i].Id })" class="list-group-item">@Model.categories[i].Name</a>
+        }
+    </div>
+</div>
+<!-- /.col-lg-3 -->
+<div class="col-lg-9">
+    <div class="row">
+        @for (int i = 0; i < Model.products.Count; i++)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="@Url.Action("Index", "Product", new { id = Model.products[i].Id })"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="@Url.Action("Index", "Product", new { id = Model.products[i].Id })">@Model.products[i].Name</a>
+                        </h4>
+                        <h5>@Model.products[i].Price VNĐ</h5>
+                        <p class="card-text">@Model.products[i].Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+

@@ -25,5 +25,10 @@ namespace DataAccess.Entities
         public bool? ShowOnHome { get; set; }
 
         public ICollection<Product> Product { get; set; }
+
+        public static implicit operator List<object>(ProductCategory v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
