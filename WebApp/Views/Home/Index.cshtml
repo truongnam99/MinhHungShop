@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@*<div class="col-lg-3">
+<div class="col-lg-3">
     <h1 class="my-4">Minh Hùng Shop</h1>
     <div class="list-group">
         @for (int i = 0; i < Model.categories.Count; i++)
@@ -10,7 +10,7 @@
             <a href="@Url.Action("Category", "Home", new { id = Model.categories[i].Id })" class="list-group-item">@Model.categories[i].Name</a>
         }
     </div>
-</div>*@
+</div>
 <!-- /.col-lg-3 -->
 <div class="col-lg-9">
     <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
