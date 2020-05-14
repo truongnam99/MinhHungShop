@@ -32,7 +32,7 @@
                     <th scope="row">@(i + 1)</th>
                     <td>@products.ElementAt(i).Name</td>
                     <td>@products.ElementAt(i).Price</td>
-                    <td>@products.ElementAt(i).Name</td>
+                    <td>@products.ElementAt(i).Producer.Name</td>
                     <td>@products.ElementAt(i).Name</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@products.ElementAt(i).Id" class="text-warning">

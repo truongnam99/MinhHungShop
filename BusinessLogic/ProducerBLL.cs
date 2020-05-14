@@ -31,7 +31,9 @@ namespace BusinessLogic
             // handle 
             try
             {
-                _context.Add(Producer);
+                Producer pro = Producer;
+
+                _context.Add(pro);
                 await _context.SaveChangesAsync();
                 // return the status of handle: success or failed or...
                 return Utils.Status.Success;
