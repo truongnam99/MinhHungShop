@@ -83,7 +83,7 @@ namespace BusinessLogic
 
         public async Task<List<Product>> GetProductByCategory(long id)
         {
-            List<Product> products = await dBContext.Product.FromSql("exec sp_SelectProductByCategoryID @id=1").ToListAsync();
+            List<Product> products = await dBContext.Product.FromSql("exec sp_SelectProductByCategoryID @id={0}", id).ToListAsync();
             return products;
         }
 

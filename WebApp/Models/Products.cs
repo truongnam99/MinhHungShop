@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models
 {
-    public class ListProAndCate
+    public class Products
     {
 
-        public List<Product> products { get; set; }
-        public List<ProductCategory> categories { get; set; }
-      
-        public ListProAndCate()
+        public List<Product> products { get; set; }    
+        public Products()
         {
-
-            categories = new List<ProductCategory>();
             products = new List<Product>();
         }
     }

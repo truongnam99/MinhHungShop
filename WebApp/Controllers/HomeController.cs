@@ -25,13 +25,17 @@ namespace WebApp.Controllers
             //pr.Price = 200;
             ProductBLL productBLL = ProductBLL.getIns();
             //var mytask = productBLL.Add(pr);
-            List<Product> products = await productBLL.GetTop();
-            List<ProductCategory> categories = await productBLL.GetCategory();
+            List<Product> pros = await productBLL.GetTop();
+            Products products = new Products();
+            products.products = pros;
+           
+            //products.OrderByDescending(x => x.ViewCount).ToPagedList(1, 10);
+            //List<ProductCategory> categories = await productBLL.GetCategory();
             //Categories categories = new Categories();
             //categories.categories = await productBLL.GetCategory();
-            ListProAndCate list = new ListProAndCate();
-            list.products = products;
-            list.categories = categories;
+            //ListProAndCate list = new ListProAndCate();
+            //list.products = products;
+            //list.categories = categories;
             //foreach (Product pro in products)
             //{
             //    list.products.Add(pro);
@@ -41,27 +45,28 @@ namespace WebApp.Controllers
             //    list.categories.Add(cate);
             //}
             // list.products.Add(pr);
-            return View(list);
+            return View(products);
+
+
         }
         
         public async Task<IActionResult> Category(long id)
         {
             ProductBLL productBLL = ProductBLL.getIns();
             List<Product> products = await productBLL.GetProductByCategory(id);
-            products.OrderByDescending(x => x.ViewCount).ToPagedList(1, 10);
-            List<ProductCategory> categories = await productBLL.GetCategory();
+            //products.OrderByDescending(x => x.ViewCount).ToPagedList(1, 10);
+            //List<ProductCategory> categories = await productBLL.GetCategory();
             //Categories categories = new Categories();
             //categories.categories = await productBLL.GetCategory();
-            ListProAndCate list = new ListProAndCate();
+            Products list = new Products();
             list.products = products;
-            list.categories = categories;
+            //list.categories = categories;
             
             return View(list);
         }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 

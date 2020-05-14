@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogic;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -10,7 +12,10 @@ namespace WebApp.Controllers
     {
         public IActionResult Index(long id)
         {
-            return View();
+            ProductBLL productBLL = ProductBLL.getIns();
+            Product product = productBLL.GetProduct(id);
+
+            return View(product);
         }
     }
 }
