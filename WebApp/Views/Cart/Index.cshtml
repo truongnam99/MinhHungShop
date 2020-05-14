@@ -1,0 +1,95 @@
+﻿@model WebApp.Models.Products
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layoutweb.cshtml";
+
+}
+
+
+<div class="col-lg-9">
+
+    <!------ Include the above in your HEAD tag ---------->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <table class="table table-hover">
+                    
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Total</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.products.Count; i++)
+                        {
+                            <tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="#">@Model.products[i].Name</a></h4>
+                                            <h5 class="media-heading"> by <a href="#">@Model.products[i].Producer</a></h5>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-1 col-md-1" style="        text-align: center">
+                                    @using (Html.BeginForm("Update", "Cart", FormMethod.Post))
+                                    {
+                                        @Html.TextBoxFor(model => model.products[i].Quantity,  new { id = i})
+
+                                        <button type="submit" size="10">Update</button>
+                                    }
+
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@Model.products[i].Price</strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>@(Model.products[i].Price * Model.products[i].Quantity)</strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h5>Subtotal</h5></td>
+                            <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-primary" size="50px">
+                                    <i class="far fa-plus-square"></i> <span>Tiếp tục mua hàng</span>
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+
+                            <td>
+                               
+                            </td>
+                            <td>
+                                <a asp-action="Update" class="btn btn-primary">
+                                    <i class="far fa-plus-square"></i> <span>Thanh toán</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,19 +1,11 @@
 ﻿@*@model PagedList.IPagedList<WebApp.Models.ListProAndCate>*@
-@model WebApp.Models.ListProAndCate
+@model WebApp.Models.Products
 @using PagedList.Mvc;
 @{
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_Layoutweb.cshtml";
 }
-<div class="col-lg-3">
-    <h1 class="my-4">Minh Hùng Shop</h1>
-    <div class="list-group">
-        @for (int i = 0; i < Model.categories.Count; i++)
-        {
-            <a href="@Url.Action("Category", "Home", new { id = Model.categories[i].Id })" class="list-group-item">@Model.categories[i].Name</a>
-        }
-    </div>
-</div>
+
 <!-- /.col-lg-3 -->
 <div class="col-lg-9">
     <div class="row">
