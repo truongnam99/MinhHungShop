@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DataAccess.Entities.Orders>
+
+@{
+    Layout = "Orders/_layout";
+}
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-fill mr-1"></i>Danh sách đơn hàng</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Vùng</th>
+                    <th scope="col">Giá trị</th>
+                    <th scope="col">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < 10; i++)
+                    {
+
+                        <tr>
+                            <th scope="row">@(i+1)</th>
+                            <td>#161031</td>
+                            <td>Trương Hoàng Nam</td>
+                            <td>
+                                0949729491
+                            </td>
+                            <td>HCM</td>
+                            <td>Giá trị</td>
+                            <td><div class="btn btn-primary">Chi tiết</div><div class="btn btn-danger">Hủy</div></td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>

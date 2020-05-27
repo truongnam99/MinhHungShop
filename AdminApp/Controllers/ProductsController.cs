@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLogic;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 
 namespace AdminApp.Controllers
 {
@@ -23,6 +24,13 @@ namespace AdminApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Details(long? id)
+        {
+
+            var product = ProductBLL.getIns().GetProduct(id);
+            return View(product);
+        }
+
         public async Task<IActionResult> Create(Utils.Status? status)
         {
             ViewBag.Status = status;
@@ -33,12 +41,18 @@ namespace AdminApp.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name, Price,ProducerId,CategoryId,Image,Description,Detail")]Product product)
+        public async Task<IActionResult> Create([Bind("Name, Price,ProducerId,CategoryId,Description,Detail")]Product product)
         {
+            //if (file.ContentLength > 0)
+            //{
+            //    var fileName = Path.GetFileName(file.FileName);
+            //    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+            //    file.SaveAs(path);
+            //}
+
+
             if (ModelState.IsValid)
             {
-                product.Category = await ProductCategoryBLL.getIns().GetProductCategory(product.CategoryId);
-                product.Producer = await ProducerBLL.getIns().GetProducer(product.ProducerId);
                 Utils.Status status = await ProductBLL.getIns().Add(product);
                 return RedirectToAction("Create", new { status = status });
             }
@@ -63,6 +77,9 @@ namespace AdminApp.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Producers = await ProducerBLL.getIns().GetProducers();
+            ViewBag.ProductCategories = await ProductCategoryBLL.getIns().GetProductCategories();
             ViewBag.Status = status;
             return View(product);
         }
@@ -78,8 +95,6 @@ namespace AdminApp.Controllers
 
             if (ModelState.IsValid)
             {
-                product.Category = await ProductCategoryBLL.getIns().GetProductCategory(product.CategoryId);
-                product.Producer = await ProducerBLL.getIns().GetProducer(product.ProducerId);
                 Utils.Status status = await ProductBLL.getIns().Update(product);
                 ViewBag.Product = product;
                 return RedirectToAction("Edit", new { status = status });
@@ -93,7 +108,18 @@ namespace AdminApp.Controllers
             ViewBag.Product = ProductBLL.getIns().GetProduct(id);
             return View();
         }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(long id)
+        {
+            Utils.Status status = await ProductBLL.getIns().Remove(id);
+            return RedirectToAction("Index", new { status = status });
+        }
+
         
+
         public IActionResult Search()
         {
             return View();

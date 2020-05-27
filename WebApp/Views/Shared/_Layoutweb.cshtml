@@ -1,6 +1,6 @@
-﻿@using DataAccess
+﻿@using DataAccess.Entities
 @{ 
-    DBContextIns dBContext = DBContextIns.getIns();
+    MinhHungShopContext dBContext = new MinhHungShopContext();
     List<DataAccess.Entities.ProductCategory> categories = dBContext.ProductCategory.ToList();
 }
 <!DOCTYPE html>
