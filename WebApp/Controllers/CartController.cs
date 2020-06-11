@@ -65,9 +65,13 @@ namespace WebApp.Controllers
         }
         public IActionResult Update(Products pros, int id)
         {
-            products.products[id].Quantity = pros.products[id].Quantity;
-            //list = pros;
-            pros = products;
+            try
+            {
+                products.products[id].Quantity = pros.products[id].Quantity;
+                //list = pros;
+                pros = products;
+            }
+            catch (Exception e) { }
             update = true;
             return RedirectToAction("Index", "Cart");
         }

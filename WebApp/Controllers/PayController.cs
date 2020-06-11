@@ -20,5 +20,13 @@ namespace WebApp.Controllers
             list = products.products;
             return View(list);
         }
+
+        public IActionResult AddOrder(OrderModel orderModel)
+        {
+            if (ModelState.IsValid)
+            {
+                OrderModel 
+            }
+        }
     }
 }

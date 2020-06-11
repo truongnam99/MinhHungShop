@@ -28,7 +28,7 @@
 
                         @if (Model.products.Count > 0)
                         {
-                            decimal total = 0;
+                            
                             for (int i = 0; i < Model.products.Count; i++)
                             {
 
@@ -48,7 +48,7 @@
                                         {
                                             @Html.TextBoxFor(model => model.products[i].Quantity, new { id = Model.products[i].Id })
 
-                                            <button type="submit" size="10">Update</button>
+                                            <button type="submit" size="10" class=" alert-primary">Update</button>
                                         }
 
                                     </td>
@@ -62,7 +62,7 @@
                                         <a href="@Url.Action("Remove", "Cart", new { id = Model.products[i].Id })" class="btn btn-danger">Remove</a>
                                     </td>
                                 </tr>
-               
+
                             }
                         }
                         else
@@ -104,7 +104,7 @@
             }
         }*@
 
-                    
+
                         <tr>
                             <td>
                                 <a asp-controller="Home" asp-action="Index" class="btn btn-primary" size="50px">
