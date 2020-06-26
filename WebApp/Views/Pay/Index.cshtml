@@ -1,4 +1,4 @@
-﻿@model List<DataAccess.Entities.Product>
+﻿@model WebApp.Models.OrderModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layoutweb.cshtml";
@@ -36,10 +36,10 @@
                         </div>
                         <div class="panel-body">
 
-                            @if (Model.Count > 0)
+                            @if (Model.products.Count > 0)
                             {
                                 decimal? total = 0;
-                                foreach (var item in Model)
+                                foreach (var item in Model.products)
                                 {
                                     <div class="form-group">
                                         <div class="col-sm-3 col-xs-3">
@@ -85,40 +85,49 @@
                     <!--SHIPPING METHOD-->
                     <div class="panel panel-info">
                         <div class="panel-heading">Address</div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <h4>Shipping Address</h4>
-                                </div>
-                            </div>
-                          
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Full Name</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="name" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Address:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="" />
-                                </div>
-                            </div>
+                        @using (Html.BeginForm("Index", "Pay", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="panel-body">
 
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Phone Number:</strong></div>
-                                <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="" /></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Email Address:</strong></div>
-                                <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="" /></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h4>Shipping Address</h4>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Full Name</strong></div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.customer.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Address:</strong></div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.customer.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Phone Number:</strong></div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12"><strong>Email Address:</strong></div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.customer.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                     <!--SHIPPING METHOD END-->
                     

@@ -8,7 +8,13 @@ namespace WebApp.Models
 {
     public class OrderModel
     {
-        public Products products { get; set; }
+        public List<Product> products { get; set; }
         public Customer customer { get; set; }
+        public OrderModel()
+        {
+            products = new List<Product>();
+            //customer = new Customer();
+        }
+       
     }
 }

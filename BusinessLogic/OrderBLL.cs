@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -26,20 +27,36 @@ namespace BusinessLogic
         }
 
 
-        public List<string> Add(Orders orders, Customer cus, OrderDetail orderDetail)
+        public async Task<long> Add(Orders orders)
         {
             // handle 
             try
             {
-                _context.Add(cus);
-                _context.SaveChangesAsync();
-                var cusId =Convert.ToString(_context.Customer.FromSql("SELECT IDENT_CURRENT('Customer')"));
-              
-                return null;
+                _context.Add(orders);
+                await _context.SaveChangesAsync();
+                List<Orders> list = await _context.Orders.FromSql("exec sp_SelectLastIdOrder").ToListAsync();
+                long orderId = list[0].Id;
+                return orderId;
             }
             catch (Exception e)
             {
-                return null;
+                return -1;
+            }
+        }
+
+        public async Task<Utils.Status> AddOrderDetail(OrderDetail orderDetail)
+        {
+            // handle 
+            try
+            {
+                _context.Add(orderDetail);
+                await _context.SaveChangesAsync();
+                // return the status of handle: success or failed or...
+                return Utils.Status.Success;
+            }
+            catch (Exception e)
+            {
+                return Utils.Status.Failed;
             }
         }
     }

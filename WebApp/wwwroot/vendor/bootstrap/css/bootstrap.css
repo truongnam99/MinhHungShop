@@ -50,11 +50,6 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
-  margin-bottom :0px;
-}
-#footer {
-    position: fixed;
-    bottom: 0px;
 }
 
 body {
@@ -472,16 +467,14 @@ mark,
 }
 
 .blockquote-footer {
-    display: block;
-    font-size: 80%;
-    color: #6c757d;
-    margin-bottom: 0px;
+  display: block;
+  font-size: 80%;
+  color: #6c757d;
 }
 
-    .blockquote-footer::before {
-        content: "\2014\00A0";
-        margin-bottom: 0px;
-    }
+.blockquote-footer::before {
+  content: "\2014\00A0";
+}
 
 .img-fluid {
   max-width: 100%;
@@ -4628,16 +4621,14 @@ input[type="button"].btn-block {
 }
 
 .card-footer {
-    padding: 0.75rem 1.25rem;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 0px;
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-    .card-footer:last-child {
-        border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
-        margin-bottom: 0px;
-    }
+.card-footer:last-child {
+  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
 
 .card-header-tabs {
   margin-right: -0.625rem;
@@ -4741,11 +4732,10 @@ input[type="button"].btn-block {
   .card-group > .card:not(:last-child) .card-header {
     border-top-right-radius: 0;
   }
-    .card-group > .card:not(:last-child) .card-img-bottom,
-    .card-group > .card:not(:last-child) .card-footer {
-        border-bottom-right-radius: 0;
-        margin-bottom: 0px;
-    }
+  .card-group > .card:not(:last-child) .card-img-bottom,
+  .card-group > .card:not(:last-child) .card-footer {
+    border-bottom-right-radius: 0;
+  }
   .card-group > .card:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -5784,12 +5774,11 @@ a.close.disabled {
   overflow: hidden;
 }
 
-    .modal-dialog-scrollable .modal-header,
-    .modal-dialog-scrollable .modal-footer {
-        -ms-flex-negative: 0;
-        flex-shrink: 0;
-        margin-bottom: 0px;
-    }
+.modal-dialog-scrollable .modal-header,
+.modal-dialog-scrollable .modal-footer {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
 
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
@@ -5889,28 +5878,25 @@ a.close.disabled {
 }
 
 .modal-footer {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    padding: 1rem;
-    border-top: 1px solid #dee2e6;
-    border-bottom-right-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
-    margin-bottom: 0px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
 }
 
-    .modal-footer > :not(:first-child) {
-        margin-left: .25rem;
-        margin-bottom: 0px;
-    }
+.modal-footer > :not(:first-child) {
+  margin-left: .25rem;
+}
 
-    .modal-footer > :not(:last-child) {
-        margin-right: .25rem;
-        margin-bottom: 0px;
-    }
+.modal-footer > :not(:last-child) {
+  margin-right: .25rem;
+}
 
 .modal-scrollbar-measure {
   position: absolute;
@@ -6592,7 +6578,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-    background-color: #90c720 !important;
+  background-color: #343a40 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,

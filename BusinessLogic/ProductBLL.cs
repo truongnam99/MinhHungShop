@@ -94,6 +94,8 @@ namespace BusinessLogic
         public async Task<List<Product>> GetTop()
         {
             List<Product> top = await _context.Product.FromSql("exec sp_SelectTopProduct").ToListAsync();
+           
+            
             return top;
         }
 
@@ -105,6 +107,7 @@ namespace BusinessLogic
 
         public Product GetProduct(long? id)
         {
+            
             return _context.Product.Find(id);
         }
         public async Task<List<ProductCategory>> GetCategory()
