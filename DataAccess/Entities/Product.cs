@@ -29,7 +29,7 @@ namespace DataAccess.Entities
         public int? Quantity { get; set; } // skip
         public long? ProducerId { get; set; } // select // id of Producer
         public long? CategoryId { get; set; } // select // id of category
-        [Required(ErrorMessage = "Trường này không được bỏ trống")]
+        //[Required(ErrorMessage = "Trường này không được bỏ trống")]
         public string Detail { get; set; } // detail
         public DateTime? CreatedDate { get; set; } // auto set
         public string CreatedBy { get; set; } // skip
