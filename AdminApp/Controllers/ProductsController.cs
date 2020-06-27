@@ -148,8 +148,7 @@ namespace AdminApp.Controllers
                     return RedirectToAction("Edit", new { status = status });
                 }
             }
-            ViewBag.Producer = product;
-            return View(product);
+            return RedirectToAction("Edit", new { status = Utils.Status.Failed });
         }
 
         public IActionResult Delete(long id)
