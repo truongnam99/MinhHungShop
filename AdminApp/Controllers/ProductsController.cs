@@ -6,15 +6,20 @@ using BusinessLogic;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AdminApp.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly MinhHungShopContext _context;
-        public ProductsController(MinhHungShopContext context)
+        private readonly IHostingEnvironment _env;
+        public ProductsController(MinhHungShopContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         
         public async Task<IActionResult> Index()
@@ -41,20 +46,31 @@ namespace AdminApp.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name, Price,ProducerId,CategoryId,Description,Detail")]Product product)
+        public async Task<IActionResult> Create([Bind("Name, Price,ProducerId,CategoryId,Description,Detail")]Product product, IFormFile imageUpload)
         {
-            //if (file.ContentLength > 0)
-            //{
-            //    var fileName = Path.GetFileName(file.FileName);
-            //    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-            //    file.SaveAs(path);
-            //}
-
-
+            
             if (ModelState.IsValid)
             {
-                Utils.Status status = await ProductBLL.getIns().Add(product);
-                return RedirectToAction("Create", new { status = status });
+                string filePath = _env.WebRootPath + $@"\images\{imageUpload.FileName}";
+                string dbImagePath = $@"\images\{imageUpload.FileName}";
+                
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    
+                    if (fileStream.Length < 2097152)
+                    {
+                        await imageUpload.CopyToAsync(fileStream);
+                        fileStream.Flush();
+                        fileStream.Close();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("File", "The file is too large.");
+                    }
+                    product.Image = dbImagePath;
+                    Utils.Status status = await ProductBLL.getIns().Add(product);
+                    return RedirectToAction("Create", new { status = status });
+                }
             }
             else
             {
@@ -86,7 +102,7 @@ namespace AdminApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id, Name, Price,ProducerId,CategoryId,Image,Description,Detail")] Product product)
+        public async Task<IActionResult> Edit(long id, [Bind("Id, Name, Price,ProducerId,CategoryId,Description,Detail")] Product product, IFormFile imageUpload)
         {
             if (id != product.Id)
             {
@@ -95,9 +111,27 @@ namespace AdminApp.Controllers
 
             if (ModelState.IsValid)
             {
-                Utils.Status status = await ProductBLL.getIns().Update(product);
-                ViewBag.Product = product;
-                return RedirectToAction("Edit", new { status = status });
+                string filePath = _env.WebRootPath + $@"\images\{imageUpload.FileName}";
+                string dbImagePath = $@"\images\{imageUpload.FileName}";
+
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+
+                    if (fileStream.Length < 2097152)
+                    {
+                        await imageUpload.CopyToAsync(fileStream);
+                        fileStream.Flush();
+                        fileStream.Close();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("File", "The file is too large.");
+                    }
+                    product.Image = dbImagePath;
+                    Utils.Status status = await ProductBLL.getIns().Update(product);
+                    ViewBag.Product = product;
+                    return RedirectToAction("Edit", new { status = status });
+                }
             }
             ViewBag.Producer = product;
             return View(product);

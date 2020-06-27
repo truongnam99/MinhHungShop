@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@using DataAccess.Entities
+@{
+    List<Customer> customers = ViewBag.customers;
+
+}
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-fill mr-1"></i>Danh sách sản phẩm</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">SDT</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < customers.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@customers.ElementAt(i).Name</td>
+                            <td>@customers.ElementAt(i).Phone</td>
+                            <td>@customers.ElementAt(i).Address</td>
+                            <td>@customers.ElementAt(i).Email</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

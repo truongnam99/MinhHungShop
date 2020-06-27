@@ -15,7 +15,7 @@
             else if (ViewBag.Status == Utils.Status.Failed)
             {
                 <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
-            }
+                }
         }
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div class="form-row">
@@ -56,8 +56,8 @@
             <div class="form-group">
                 <label asp-for="Image" class="control-label">Hình ảnh</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01">
-                    <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+                    <input type="file" class="custom-file-input" id="imageUpload" name="imageUpload" onchange="onChangeImage()"/>
+                    <label class="custom-file-label" for="imageUpload" id="lblImageUpload">Chọn file</label>
                 </div>
             </div>
             <div class="form-group">
@@ -80,4 +80,17 @@
             </div>
         </form>
     </div>
+       <script>
+           function onChangeImage() {
+               var image = document.getElementById("imageUpload");
+               var lblImage = document.getElementById("lblImageUpload");
+               if (image.files.length === 0) {
+                   lblImage.innerText = "Chọn file";
+               }
+               else {
+                   lblImage.innerText = image.files[0].name;
+
+               }
+           }
+           </script>
 </div>

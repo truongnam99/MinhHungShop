@@ -27,6 +27,7 @@ namespace BusinessLogic
         }
 
 
+
         public async Task<long> Add(Customer cus)
         {
             // handle 
@@ -34,7 +35,7 @@ namespace BusinessLogic
             {
                 _context.Add(cus);
                 await _context.SaveChangesAsync();
-                List<Customer> list =await _context.Customer.FromSql("exec sp_SelectLastIdCus").ToListAsync();
+                List<Customer> list = await _context.Customer.FromSql("exec sp_SelectLastIdCus").ToListAsync();
                 long cusId = list[0].Id;
                 return cusId;
             }
@@ -42,6 +43,13 @@ namespace BusinessLogic
             {
                 return -1;
             }
+        }
+        public async Task<List<Customer>> GetCustomers()
+        {
+            List<Customer> customers = await _context.Customer.ToListAsync();
+
+            return customers;
+
         }
     }
 }
