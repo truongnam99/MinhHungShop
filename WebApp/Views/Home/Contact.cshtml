@@ -1,17 +1,100 @@
 ﻿@{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layoutweb.cshtml";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<div id="main-content">
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <h1 class="title" id="page-title" style="display: none;">
+        Liên hệ
+    </h1>
+    <div id="navigation">
+        <div class="tabs-secondary clearfix"><ul class="tabs secondary"></ul></div>
+    </div>
+    <div class="region region-content">
+        <div id="block-system-main" class="block block-system">
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+            <div class="content">
+                <div id="node-55" class="node node-webform clearfix">
+
+
+
+
+                    <div class="content">
+                        <div class="group-khunglh field-group-div uk-grid uk-grid-small">
+                            <div class="field field-name-field-webform-noidung field-type-text-long field-label-hidden">
+                                <div class="field-items">
+                                    <div class="field-item even">
+                                        <div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; line-height: normal;">
+                                            <div>
+                                                <div style="font-size:15px; margin-top:70px">
+                                                    <strong>MINH HÙNG SHOP MANG VẺ ĐẸP ĐẾN KHÔNG GIAN SỐNG CỦA BẠN</strong><br>
+                                                    &nbsp;
+                                                </div>
+
+                                                <div>
+                                                    <strong>Hotline</strong>: <span style="color:#FF0000;">0393981879</span><br>
+                                                    &nbsp;
+                                                </div>
+
+                                                <div>
+                                                    <strong>Email</strong>:<span style="color:#FF0000;">&nbsp;</span><a href="" style="color: rgb(17, 85, 204);" target="_blank"><span style="color:#FF0000;">Lienhe@minhhungshop.com</span></a><span style="color:#FF0000;">&nbsp;</span><br>
+                                                    &nbsp;
+                                                </div>
+
+                                                <div>
+                                                    <strong>Website</strong>:&nbsp;<a href="" style="color: rgb(17, 85, 204);" target="_blank"><span style="color:#FF0000;">www.minhhungshop.com</span></a><span style="color:#FF0000;">&nbsp;</span><br>
+                                                    &nbsp;
+                                                </div>
+                                                <strong>Cơ sở 1</strong>: TP Thủ Dầu Một, Tỉnh Bình Dương
+                                            </div>
+                                            <strong>Cơ sở 2</strong>: 
+                                        </div>
+                                        <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; line-height: normal;"><strong>Cơ sở 3</strong></span>
+                                    </div>
+                                </div>
+                            </div><form class="webform-client-form webform-client-form-55" enctype="multipart/form-data" action="/lien-he" method="post" id="webform-client-form-55" accept-charset="UTF-8">
+                                <div>
+                                    <div class="form-item webform-component webform-component-textfield webform-component--ho-ten">
+                                        <label for="edit-submitted-ho-ten">Họ tên <span class="form-required" title="Trường dữ liệu này là bắt buộc.">*</span></label>
+                                        <input required="required" type="text" id="edit-submitted-ho-ten" name="submitted[ho_ten]" value="" size="60" maxlength="128" class="form-text required">
+                                    </div>
+                                    <div class="form-item webform-component webform-component-textfield webform-component--dia-chi">
+                                        <label for="edit-submitted-dia-chi">Địa chỉ </label>
+                                        <input type="text" id="edit-submitted-dia-chi" name="submitted[dia_chi]" value="" size="60" maxlength="128" class="form-text">
+                                    </div>
+                                    <div class="form-item webform-component webform-component-email webform-component--email">
+                                        <label for="edit-submitted-email">Email <span class="form-required" title="Trường dữ liệu này là bắt buộc.">*</span></label>
+                                        <input required="required" class="email form-text form-email required" type="email" id="edit-submitted-email" name="submitted[email]" size="60">
+                                    </div>
+                                    <div class="form-item webform-component webform-component-number webform-component--dien-thoai">
+                                        <label for="edit-submitted-dien-thoai">Điện thoại <span class="form-required" title="Trường dữ liệu này là bắt buộc.">*</span></label>
+                                        <input required="required" type="text" id="edit-submitted-dien-thoai" name="submitted[dien_thoai]" step="any" class="form-text form-number required">
+                                    </div>
+                                    <div class="form-item webform-component webform-component-textfield webform-component--tieu-de">
+                                        <label for="edit-submitted-tieu-de">Tiêu đề </label>
+                                        <input type="text" id="edit-submitted-tieu-de" name="submitted[tieu_de]" value="" size="60" maxlength="128" class="form-text">
+                                    </div>
+                                    <div class="form-item webform-component webform-component-textarea webform-component--noi-dung">
+                                        <label for="edit-submitted-noi-dung">Nội dung <span class="form-required" title="Trường dữ liệu này là bắt buộc.">*</span></label>
+                                        <div class="form-textarea-wrapper resizable textarea-processed resizable-textarea"><textarea required="required" id="edit-submitted-noi-dung" name="submitted[noi_dung]" cols="60" rows="5" class="form-textarea required"></textarea><div class="grippie"></div></div>
+                                    </div>
+                                    <input type="hidden" name="details[sid]">
+                                    <input type="hidden" name="details[page_num]" value="1">
+                                    <input type="hidden" name="details[page_count]" value="1">
+                                    <input type="hidden" name="details[finished]" value="0">
+                                    <input type="hidden" name="form_build_id" value="form-nLYhIF8_Kvh4VkYSD2T3QNEupbP3Vfs4C3VRBV4b0iM">
+                                    <input type="hidden" name="form_id" value="webform_client_form_55">
+                                    <div class="form-actions"><input class="webform-submit button-primary form-submit" type="submit" name="op" value="Gửi "></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,15 +13,16 @@
     <title>Shop Homepage - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
     <link href="~/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
   
   
 </head>
-<body>
+<body class="body1">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">Minh Hùng Shop</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,12 +51,47 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h1 class="my-4">Minh Hùng Shop</h1>
-                <div class="list-group">
+                <img src="~/images/logo.PNG"/>
+                <div class="title_cate_l">Danh mục</div>
+                <div class="cate_l">
                     @for (int i = 0; i < categories.Count; i++)
                     {
                         <a href="@Url.Action("Category", "Home", new { id = categories[i].Id })" class="list-group-item">@categories[i].Name</a>
                     }
+                </div>
+                <div class="title_l">
+                    <div class="ct_t_l">
+                        <a style="color:white" href="" title="GÓC TƯ VẤN">GÓC TƯ VẤN</a>
+                    </div>
+                </div>
+                <div class="ct_box_l">
+                    <ul class="list_n_l">
+                        <li style="margin-top:20px">
+                       
+                            <a style="color:green" href="" title="Tuyệt chiêu giúp ngôi nhà luôn mới">Tuyệt chiêu giúp ngôi nhà luôn mới</a>
+                            <br clear="all">
+                        </li>
+                        <li style="margin-top:20px">
+                            
+                            <a style="color:green;  margin-top:20px" href="" title="Bí mật sơn nhà tiết kiệm">Bí mật sơn nhà tiết kiệm</a>
+                            <br clear="all">
+                        </li>
+                        <li style="margin-top:20px">
+                            
+                            <a style="color:green; margin-top:20px" href="" title="Nguyên tắc vàng cho nhu cầu sơn nhà">Nguyên tắc vàng cho nhu cầu sơn nhà</a>
+                            <br clear="all">
+                        </li>
+                        <li style="margin-top:20px">
+                            
+                            <a style="color:green; margin-top:20px" href="" title="Bí quyết tối ưu chi phí sơn nhà">Bí quyết tối ưu chi phí sơn nhà</a>
+                            <br clear="all">
+                        </li>
+                        <li style="margin-top:20px">
+                          
+                            <a style="color:green" href="" title="Khắc phục bề mặt bột trét có nhiều vết xước">Khắc phục bề mặt bột trét có nhiều vết xước</a>
+                            <br clear="all">
+                        </li>
+                    </ul>
                 </div>
             </div>
             @RenderBody()
@@ -67,7 +103,10 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+            <p class="m-0 text-center text-white">Chuyên cung cấp sơn chính hãng hàng đầu Việt Nam &copy;</p>
+            <p class="m-0 text-center text-white">Liên hệ : 0987654321</p>
+            <p class="m-0 text-center text-white">Thiết kế bới : HNPH</p>
+
         </div>
         <!-- /.container -->
     </footer>

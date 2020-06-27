@@ -5,7 +5,7 @@
 }
 <div class="col-lg-9">
     <div class="card mt-4">
-        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+        <img class="card-img-top img-fluid" src="@Model.Image" alt="">
         <div class="card-body">
             <h3 class="card-title">@Model.Name</h3>
             <h4>@Model.Price</h4>
@@ -19,16 +19,16 @@
             Product Reviews
         </div>
         <div class="card-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>@Model.MetaTitle</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>@Model.Detail</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>@Model.Description</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
-            <a href="@Url.Action("GetProduct", "Cart", new { id = Model.Id })" class="btn btn-success">Leave a Review</a>
+            <a href="@Url.Action("GetProduct", "Cart", new { id = Model.Id })" class="btn btn-success">Mua hàng</a>
         </div>
     </div>
     <!-- /.card -->
