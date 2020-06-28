@@ -94,8 +94,11 @@ namespace BusinessLogic
         public async Task<List<Product>> GetTop()
         {
             List<Product> top = await _context.Product.FromSql("exec sp_SelectTopProduct").ToListAsync();
-           
-            
+            foreach(var p in top)
+            {
+                p.Category = _context.ProductCategory.Find(p.CategoryId);
+                p.Producer = _context.Producer.Find(p.ProducerId);
+            }
             return top;
         }
 

@@ -37,11 +37,7 @@ namespace AdminApp
                      .AddDbContext<DataAccess.Entities.MinhHungShopContext>((serviceProvider, options) =>
                          options.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;")
                                 .UseInternalServiceProvider(serviceProvider));
-            //services.AddEntityFrameworkSqlServer().AddDbContext<DataAccess.Entities.MinhHungShopContext>((serviceProvider, options) =>
-            //             options.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;")
-            //                    .UseInternalServiceProvider(serviceProvider));
-            //services.AddDbContext<DataAccess.Entities.MinhHungShopContext>(option => option.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;"));
-            //services.AddDbContext<DataAccess.Entities.MinhHungShopContext>(opt => opt.UseInMemoryDatabase("abc"));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

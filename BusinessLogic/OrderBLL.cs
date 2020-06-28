@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using BLL.Models;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -61,14 +62,14 @@ namespace BusinessLogic
             }
         }
 
-        public async Task<List<object>> OrderByMonths()
+        public async Task<List<OrderByMonth>> OrderByMonths()
         {
             try
             {
                 string query = @"select Top 6 FORMAT(CreatedDate, 'yyyy_MM') AS CreatedMonth, COUNT(FORMAT(CreatedDate, 'yyyy_MM')) as count from Orders
                 group by FORMAT(CreatedDate, 'yyyy_MM')
                 order by CreatedMonth";
-                List<object> result = new List<object>();
+                List<OrderByMonth> result = new List<OrderByMonth>();
                 SqlConnection connection = new SqlConnection("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;");
                     connection.Open();
                     SqlCommand cmd = new SqlCommand(query, connection);
@@ -77,10 +78,10 @@ namespace BusinessLogic
                     {
                         while (reader.Read())
                         {
-                            result.Add(new
+                            result.Add(new OrderByMonth()
                             {
-                                CreatedMonth = reader[0].ToString(),
-                                Count = reader[1].ToString()
+                                month = reader[0].ToString(),
+                                quantity = reader[1].ToString()
                             });
                         }
                     }
