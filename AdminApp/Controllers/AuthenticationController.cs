@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminApp.Controllers
 {
     public class AuthenticationController : Controller
     {
+        SignInManager<IdentityUser> _signManager;
+        public AuthenticationController(SignInManager<IdentityUser> signInManage)
+        {
+            _signManager = signInManage;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Login()
+        [HttpGet]
+        public async Task<IActionResult> Logout()
         {
-            return View();
-        }
-
-        public IActionResult Logout()
-        {
-            return View();
+            await _signManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
