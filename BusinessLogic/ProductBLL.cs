@@ -44,11 +44,22 @@ namespace BusinessLogic
             }
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Product>> GetProducts(string searchText="")
         {
-            List<Product> products = await _context.Product.Include(c => c.Category).Include(p => p.Producer).ToListAsync();
+            List<Product> products;
 
-
+            if (searchText==null || searchText == "")
+            {
+                products = await _context.Product.Include(c => c.Category).Include(p => p.Producer).ToListAsync();
+            }
+            else
+            {
+                products = await _context.Product.Include(c => c.Category).Include(p => p.Producer).ToListAsync<Product>();
+                products = products.FindAll(delegate (Product p)
+                {
+                    return p.Name.Contains(searchText)|| p.Producer.Name.Contains(searchText) || p.Category.Name.Contains(searchText);
+                });
+            }
 
             return products;
         }

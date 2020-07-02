@@ -20,10 +20,11 @@ namespace AdminApp.Controllers
         }
 
         // GET: Producers
-        public async Task<IActionResult> Index(Utils.Status? status)
+        public async Task<IActionResult> Index(Utils.Status? status, [FromQuery(Name = "searchText")]String searchText)
         {
             ViewBag.Status = status;
-            ViewBag.Producers = await ProducerBLL.getIns().GetProducers();
+            ViewBag.Producers = await ProducerBLL.getIns().GetProducers(searchText);
+            ViewBag.searchText = searchText;
             return View();
         }
 

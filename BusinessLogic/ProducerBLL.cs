@@ -44,9 +44,14 @@ namespace BusinessLogic
             }
         }
 
-        public async Task<List<Producer>> GetProducers()
+        public async Task<List<Producer>> GetProducers(string searchText="")
         {
             List<Producer> producers = await _context.Producer.ToListAsync();
+            if(searchText!=null && searchText != "")
+                producers = producers.FindAll(delegate (Producer p)
+                    {
+                        return p.Name.Contains(searchText);
+                    });
             return producers;
         }
 

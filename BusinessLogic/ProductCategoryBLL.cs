@@ -44,10 +44,14 @@ namespace BusinessLogic
             }
         }
 
-        public async Task<List<ProductCategory>> GetProductCategories()
+        public async Task<List<ProductCategory>> GetProductCategories(string searchText="")
         {
             List<ProductCategory> productCategories = await dBContext.ProductCategory.ToListAsync();
-
+            if (searchText != null && searchText != "")
+                productCategories = productCategories.FindAll(delegate (ProductCategory p)
+                {
+                    return p.Name.Contains(searchText);
+                });
             return productCategories;
         }
 

@@ -22,10 +22,10 @@ namespace AdminApp.Controllers
             _env = env;
         }
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery(Name = "searchText")]String searchText)
         {
-            ViewBag.Products = await ProductBLL.getIns().GetProducts();
-
+            ViewBag.Products = await ProductBLL.getIns().GetProducts(searchText);
+            ViewBag.searchText = searchText;
             return View();
         }
 

@@ -38,21 +38,6 @@ namespace AdminApp.Areas.Identity.Services
             mailMessage.Body = message;
             mailMessage.Subject = subject;
             return client.SendMailAsync(mailMessage);
-            //var client = new SendGridClient(apiKey);
-            //var msg = new SendGridMessage()
-            //{
-            //    From = new EmailAddress("namuit.k12@gmail.com", "Truong Nam"),
-            //    Subject = subject,
-            //    PlainTextContent = message,
-            //    HtmlContent = message
-            //};
-            //msg.AddTo(new EmailAddress(email));
-
-            //// Disable click tracking.
-            //// See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            //msg.SetClickTracking(false, false);
-
-            //return client.SendEmailAsync(msg);
         }
     }
 }

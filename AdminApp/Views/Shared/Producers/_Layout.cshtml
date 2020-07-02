@@ -19,8 +19,8 @@
                             <a class="nav-link active" href="/Producers">Nhà cung cấp</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <form asp-action="Index" class="form-inline my-2 my-lg-0" method="get">
+                        <input class="form-control mr-sm-2" id="searchText" name="searchText" type="text" placeholder="Tìm kiếm" aria-label="Search" value=@ViewBag.searchText>
                         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Tìm kiếm</button>
                     </form>
                 </div>

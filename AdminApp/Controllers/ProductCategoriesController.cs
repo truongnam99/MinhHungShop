@@ -20,10 +20,11 @@ namespace AdminApp.Controllers
         }
 
         // GET: ProductCategories
-        public async Task<IActionResult> Index(Utils.Status? status)
+        public async Task<IActionResult> Index(Utils.Status? status, string searchText)
         {
             ViewBag.Status = status;
-            ViewBag.ProductCategories = await ProductCategoryBLL.getIns().GetProductCategories();
+            ViewBag.ProductCategories = await ProductCategoryBLL.getIns().GetProductCategories(searchText);
+            ViewBag.searchText = searchText;
             return View();
         }
 
