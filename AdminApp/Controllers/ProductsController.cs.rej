@@ -1,0 +1,23 @@
+diff a/AdminApp/Controllers/ProductsController.cs b/AdminApp/Controllers/ProductsController.cs	(rejected hunks)
+@@ -113,6 +113,21 @@
+             {
+                 string filePath = _env.WebRootPath + $@"\images\{imageUpload.FileName}";
+                 string dbImagePath = $@"\images\{imageUpload.FileName}";
++                string filePath2 = _env.WebRootPath.Replace("AdminApp\\wwwroot", "WebApp\\wwwroot") + $@"\images\{imageUpload.FileName}";
++                using (FileStream fileStream = new FileStream(filePath2, FileMode.Create, FileAccess.Write))
++                {
++
++                    if (fileStream.Length < 2097152)
++                    {
++                        await imageUpload.CopyToAsync(fileStream);
++                        fileStream.Flush();
++                        fileStream.Close();
++                    }
++                    else
++                    {
++                        ModelState.AddModelError("File", "The file is too large.");
++                    }
++                }
+ 
+                 using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                 {

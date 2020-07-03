@@ -28,6 +28,25 @@ namespace AdminApp.Controllers
             ViewBag.searchText = searchText;
             return View();
         }
+        
+        public async Task<IActionResult> ExportExcel([FromQuery(Name = "searchText")]String searchText)
+        {
+            List<Product> products = await ProductBLL.getIns().GetProducts(searchText);
+            
+            try
+            {
+                OfficeOpenXml.ExcelPackage excel = await ProductExcel.CreateFileExcel(products);
+                return File(excel.GetAsByteArray(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "excel.xlsx");
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return View();
+        }
 
         public async Task<IActionResult> Details(long? id)
         {
