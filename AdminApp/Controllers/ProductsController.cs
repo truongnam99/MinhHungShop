@@ -29,13 +29,15 @@ namespace AdminApp.Controllers
             return View();
         }
         
-        public async Task<IActionResult> ExportExcel([FromQuery(Name = "searchText")]String searchText)
+        public async Task<IActionResult> ExportExcel()
         {
-            List<Product> products = await ProductBLL.getIns().GetProducts(searchText);
+            List<Product> products = await ProductBLL.getIns().GetProducts();
+            List<Producer> producers = await ProducerBLL.getIns().GetProducers();
+            List<ProductCategory> categories = await ProductCategoryBLL.getIns().GetProductCategories();
             
             try
             {
-                OfficeOpenXml.ExcelPackage excel = await ProductExcel.CreateFileExcel(products);
+                OfficeOpenXml.ExcelPackage excel = await ProductExcel.CreateFileExcel(products, producers, categories);
                 return File(excel.GetAsByteArray(),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "excel.xlsx");
