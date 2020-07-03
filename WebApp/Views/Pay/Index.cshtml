@@ -8,127 +8,128 @@
 <script src="js-pay/jquery-3.5.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="row cart-body">
-    
-    <form class="form-horizontal" method="post" action="">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
-            <!--REVIEW ORDER-->
-            <div class="panel panel-info">
+<div class="col-lg-9" style="margin-top:50px">
+    <div class="row cart-body">
 
-                <div class="panel-body">
-                    @{
-                        if (Model.products.Count > 0)
-                        {
-                            decimal? total = 0;
-                            foreach (var item in Model.products)
+        <form class="form-horizontal" method="post" action="">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+                <!--REVIEW ORDER-->
+                <div class="panel panel-info">
+
+                    <div class="panel-body">
+                        @{
+                            if (Model.products.Count > 0)
                             {
+                                decimal? total = 0;
+                                foreach (var item in Model.products)
+                                {
+                                    <div class="form-group">
+                                        <div class="col-sm-3 col-xs-3">
+                                            <img class="img-responsive" src="@item.Image" style="width: 55px; height: 55px;" />
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6">
+                                            <div class="col-xs-12">@item.Name</div>
+                                            <div class="col-xs-12"><small>Số lượng:<span>@item.Quantity</span></small></div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-3 text-right">
+                                            <h6><span>$</span>@(item.Quantity * item.Price)</h6>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><hr /></div>
+                                    total += item.Quantity * item.Price;
+
+                                }
                                 <div class="form-group">
-                                    <div class="col-sm-3 col-xs-3">
-                                        <img class="img-responsive" src="@item.Image" style="width: 55px; height: 55px;" />
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <div class="col-xs-12">@item.Name</div>
-                                        <div class="col-xs-12"><small>Số lượng:<span>@item.Quantity</span></small></div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-3 text-right">
-                                        <h6><span>$</span>@(item.Quantity * item.Price)</h6>
+                                    <div class="col-xs-12">
+                                        <strong>Tổng đơn hàng</strong>
+
+                                        <div class="pull-right"><span>$</span><span>@total</span></div>
                                     </div>
                                 </div>
-                                <div class="form-group"><hr /></div>
-                                total += item.Quantity * item.Price;
 
                             }
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <strong>Tổng đơn hàng</strong>
+                            else
+                            {
 
-                                    <div class="pull-right"><span>$</span><span>@total</span></div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <strong>Tổng đơn hàng</strong>
+
+                                        <div class="pull-right"><span>$</span><span>0 VNĐ</span></div>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                    </div>
+                </div>
+                <!--REVIEW ORDER END-->
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                <!--SHIPPING METHOD-->
+                @{
+                    if (ViewBag.Status == "Success")
+                    {
+                        <div class="alert alert-success" role="alert">@ViewBag.Status</div>
+                    }
+                    else if (ViewBag.Status == "Fail")
+                    {
+                        <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
+                    }
+                }
+                <div class="panel panel-info">
+                    <div class="panel-heading">Thông tin người nhận</div>
+                    @using (Html.BeginForm("Index", "Pay", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <h4>Thông tin khách hàng</h4>
                                 </div>
                             </div>
 
-                        }
-                        else
-                        {
-
                             <div class="form-group">
-                                <div class="col-xs-12">
-                                    <strong>Tổng đơn hàng</strong>
-
-                                    <div class="pull-right"><span>$</span><span>0 VNĐ</span></div>
+                                <div class="col-md-12"><strong>Họ và tên</strong></div>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.customer.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.customer.Name, "* Không bỏ trống", new { @class = "text-danger" })
                                 </div>
                             </div>
-                        }
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Địa chỉ:</strong></div>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.customer.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Số điện thoại:</strong></div>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.customer.Phone, "* Không bỏ trống", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12"><strong>Địa chỉ Email:</strong></div>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.customer.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <button type="submit" class="btn btn-primary btn-submit-fix">Xác nhận</button>
+                                </div>
+
+                            </div>
+                        </div>
                     }
                 </div>
+                <!--SHIPPING METHOD END-->
+
             </div>
-            <!--REVIEW ORDER END-->
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-            <!--SHIPPING METHOD-->
-            @{
-                if (ViewBag.Status == "Success")
-                {
-                    <div class="alert alert-success" role="alert">@ViewBag.Status</div>
-                }
-                else if (ViewBag.Status == "Fail")
-                {
-                    <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
-                }
-            }
-            <div class="panel panel-info">
-                <div class="panel-heading">Thông tin người nhận</div>
-                @using (Html.BeginForm("Index", "Pay", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="panel-body">
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <h4>Thông tin khách hàng</h4>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12"><strong>Họ và tên</strong></div>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(model => model.customer.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.customer.Name, "* Không bỏ trống", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12"><strong>Địa chỉ:</strong></div>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(model => model.customer.Address, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12"><strong>Số điện thoại:</strong></div>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(model => model.customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.customer.Phone, "* Không bỏ trống", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12"><strong>Địa chỉ Email:</strong></div>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(model => model.customer.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <button type="submit" class="btn btn-primary btn-submit-fix">Xác nhận</button>
-                            </div>
-
-                        </div>
-                    </div>
-                }
-            </div>
-            <!--SHIPPING METHOD END-->
-
-        </div>
-
-    </form>
+        </form>
+    </div>
 </div>
- 

@@ -53,7 +53,6 @@ namespace AdminApp.Controllers
             {
                 string filePath = _env.WebRootPath + $@"\images\{imageUpload.FileName}";
                 string dbImagePath = $@"\images\{imageUpload.FileName}";
-                
                 using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                 {
                     
