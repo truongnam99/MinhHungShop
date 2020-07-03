@@ -1,69 +1,122 @@
-﻿@model DataAccess.Entities.Orders
-
+﻿@model AdminApp.Models.OrderDetailModel
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
+<link href="~/css-pay/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+<div class="row cart-body">
+    <form class="form-horizontal" method="post" action="">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+            <!--REVIEW ORDER-->
+            <div style="margin-left: 50px;margin-top:50px" class="panel panel-info">
+                
+                <div class="panel-body">
 
-<!DOCTYPE html>
+                    @if (Model.products.Count > 0)
+                    {
+                        decimal? total = 0;
+                        foreach (var item in Model.products)
+                        {
+                            <div class="form-group">
+                                <div class="col-sm-3 col-xs-3">
+                                    <img class="img-responsive" src="@item.Image" style="width: 55px; height: 55px;" />
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="col-xs-12">@item.Name</div>
+                                    <div class="col-xs-12"><small>Số lượng:<span>@item.Quantity</span></small></div>
+                                </div>
+                                <div class="col-sm-3 col-xs-3 text-right">
+                                    <h6><span>$</span>@(item.Quantity * item.Price)</h6>
+                                </div>
+                            </div>
+                            <div class="form-group"><hr /></div>
+                            total += item.Quantity * item.Price;
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+                        }
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <strong>Tổng đơn hàng</strong>
 
-<div>
-    <h4>Orders</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.OrderDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Id)
-        </dd>
-    </dl>
+                                <div class="pull-right"><span>$</span><span>@total</span></div>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <strong>Tổng đơn hàng</strong>
+
+                                <div class="pull-right"><span>$</span><span>0 VNĐ</span></div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <!--REVIEW ORDER END-->
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+            <!--SHIPPING METHOD-->
+            <div style="margin-top:50px; margin-left:100px; width: 350px" class="panel panel-info">
+                <div class="panel-heading">Thông tin nhận hàng</div>
+               
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>Thông tin khách hàng</h4>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12"><strong>Họ và tên</strong></div>
+                            <div class="col-md-12">
+                                <label style="color:blue">@Model.orderView.CustomerName</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><strong>Địa chỉ:</strong></div>
+                            <div class="col-md-12">
+                                <label style="color:blue">@Model.orderView.CustomerAddress</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12"><strong>Số điên thoại:</strong></div>
+                            <div class="col-md-12">
+                                <label style="color:blue">@Model.orderView.CustomerPhone</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><strong>Địa chỉ email:</strong></div>
+                            <div class="col-md-12">
+                                <label style="color:blue">@Model.orderView.CustomerEmail</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @{
+                                    if (Model.orderView.Status != true)
+                                    {
+                                        <a asp-action="Approval" asp-route-id="@Model.orderView.OrderId" class="text-info">
+                                            <div class="btn btn-primary">Duyệt đơn</div>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <label style="color:red">Đơn đã được duyệt</label>
+                                    }
+                                }
+                               
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <!--SHIPPING METHOD END-->
+
+        </div>
+
+    </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-</body>
-</html>

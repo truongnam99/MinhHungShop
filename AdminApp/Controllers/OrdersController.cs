@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Entities;
+using BusinessLogic;
+using AdminApp.Models;
 
 namespace AdminApp.Controllers
 {
@@ -21,10 +23,45 @@ namespace AdminApp.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var minhHungShopContext = _context.Orders.Include(o => o.Customer);
-            return View(await minhHungShopContext.ToListAsync());
-        }
+            //var minhHungShopContext = _context.Orders.Include(o => o.Customer);
+            //return View(await minhHungShopContext.ToListAsync());
+            OrderBLL orderBLL = OrderBLL.getIns();
+            List<OrderView> list =await orderBLL.Get();
+            return View(list);
 
+        }
+        public async Task<IActionResult> Approved()
+        {
+            List<OrderView> listTrue = new List<OrderView>();
+           //var minhHungShopContext = _context.Orders.Include(o => o.Customer);
+           //return View(await minhHungShopContext.ToListAsync());
+           OrderBLL orderBLL = OrderBLL.getIns();
+            List<OrderView> list = await orderBLL.Get();
+            foreach(OrderView orderView in list)
+            {
+                if(orderView.Status==true)
+                {
+                    listTrue.Add(orderView);
+                }
+            }
+            return View("Index",listTrue);
+
+        }
+        public async Task<IActionResult> NonApproval()
+        {
+            List<OrderView> listFalse = new List<OrderView>();
+            OrderBLL orderBLL = OrderBLL.getIns();
+            List<OrderView> list = await orderBLL.Get();
+            foreach (OrderView orderView in list)
+            {
+                if (orderView.Status != true)
+                {
+                    listFalse.Add(orderView);
+                }
+            }
+            return View("Index", listFalse);
+
+        }
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -32,16 +69,26 @@ namespace AdminApp.Controllers
             {
                 return NotFound();
             }
-
-            var orders = await _context.Orders
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (orders == null)
+            OrderDetailModel orderDetailModel = new OrderDetailModel();
+            //var orders = await _context.Orders
+            //    .Include(o => o.Customer)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (orders == null)
+            //{
+            //    return NotFound();
+            //}
+            OrderBLL orderBLL = OrderBLL.getIns();
+            List<Product> products =await orderBLL.GetOrderDetail(id);
+            orderDetailModel.products = products;
+            List<OrderView> listOrderView = await orderBLL.Get();
+            foreach(OrderView orderView in listOrderView)
             {
-                return NotFound();
+                if(orderView.OrderId==id)
+                {
+                    orderDetailModel.orderView = orderView;
+                }
             }
-
-            return View(orders);
+            return View(orderDetailModel);
         }
 
         // GET: Orders/Create
@@ -121,25 +168,33 @@ namespace AdminApp.Controllers
             return View(orders);
         }
 
-        // GET: Orders/Delete/5
+        //GET: Orders/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var orders = await _context.Orders
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (orders == null)
+            OrderBLL orderBLL = OrderBLL.getIns();
+            await orderBLL.Remove(id);
+            //var orders = await _context.Orders.FindAsync(id);
+            //_context.Orders.Remove(orders);
+            //await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Approval(long? id)
+        {
+            if (id == null)
             {
                 return NotFound();
             }
-
-            return View(orders);
+            OrderBLL orderBLL = OrderBLL.getIns();
+            await orderBLL.UpdateStatus(id);
+            //var orders = await _context.Orders.FindAsync(id);
+            //_context.Orders.Remove(orders);
+            //await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Orders", new { @id = id });
         }
-
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

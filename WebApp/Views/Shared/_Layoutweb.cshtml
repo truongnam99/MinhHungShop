@@ -4,7 +4,7 @@
     List<DataAccess.Entities.ProductCategory> categories = dBContext.ProductCategory.ToList();
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-size:15px">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,11 +14,12 @@
     <!-- Bootstrap core CSS -->
     <link href="~/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-  
-  
+
+
 </head>
-<body class="body1">
+<body class="body1" style="margin-top:0px">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
@@ -51,7 +52,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <img src="~/images/logo.PNG"/>
+                <img style="margin-top:50px" src="~/images/logo.PNG" />
                 <div class="title_cate_l">Danh mục</div>
                 <div class="cate_l">
                     @for (int i = 0; i < categories.Count; i++)
@@ -67,33 +68,34 @@
                 <div class="ct_box_l">
                     <ul class="list_n_l">
                         <li style="margin-top:20px">
-                       
-                            <a style="color:green" href="" title="Tuyệt chiêu giúp ngôi nhà luôn mới">Tuyệt chiêu giúp ngôi nhà luôn mới</a>
+
+                            <a style="color:green" href="@Url.Action("NhaTuoiMoi", "GocTuVan")" title="Tuyệt chiêu giúp ngôi nhà luôn mới">Tuyệt chiêu giúp ngôi nhà luôn mới</a>
                             <br clear="all">
                         </li>
                         <li style="margin-top:20px">
-                            
-                            <a style="color:green;  margin-top:20px" href="" title="Bí mật sơn nhà tiết kiệm">Bí mật sơn nhà tiết kiệm</a>
+
+                            <a style="color:green;  margin-top:20px" href="@Url.Action("SonNhaTietKiem", "GocTuVan")" title="Bí mật sơn nhà tiết kiệm">Bí mật sơn nhà tiết kiệm</a>
                             <br clear="all">
                         </li>
                         <li style="margin-top:20px">
-                            
-                            <a style="color:green; margin-top:20px" href="" title="Nguyên tắc vàng cho nhu cầu sơn nhà">Nguyên tắc vàng cho nhu cầu sơn nhà</a>
+
+                            <a style="color:green; margin-top:20px" href="@Url.Action("NguyenTacSonNha", "GocTuVan")" title="Nguyên tắc vàng cho nhu cầu sơn nhà">Nguyên tắc vàng cho nhu cầu sơn nhà</a>
                             <br clear="all">
                         </li>
                         <li style="margin-top:20px">
-                            
+
                             <a style="color:green; margin-top:20px" href="" title="Bí quyết tối ưu chi phí sơn nhà">Bí quyết tối ưu chi phí sơn nhà</a>
                             <br clear="all">
                         </li>
                         <li style="margin-top:20px">
-                          
+
                             <a style="color:green" href="" title="Khắc phục bề mặt bột trét có nhiều vết xước">Khắc phục bề mặt bột trét có nhiều vết xước</a>
                             <br clear="all">
                         </li>
                     </ul>
                 </div>
             </div>
+            
             @RenderBody()
             <!-- /.col-lg-9 -->
         </div>
