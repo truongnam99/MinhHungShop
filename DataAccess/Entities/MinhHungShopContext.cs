@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -23,6 +24,12 @@ namespace DataAccess.Entities
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<MenuType> MenuType { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+
+        public Task SaveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Producer> Producer { get; set; }
         public virtual DbSet<Product> Product { get; set; }

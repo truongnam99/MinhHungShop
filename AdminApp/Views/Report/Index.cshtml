@@ -1,18 +1,11 @@
 ﻿@model DataAccess.Entities.Product
 @using DataAccess.Entities
+@using BLL.Models;
 @using AdminApp.Models
 @{
     Layout = "_Layout";
     List<Product> products = ViewBag.TopProducts;
-    List<object> orderByMonth = ViewBag.OrderByMonth;
-
-    List<string> labels = new List<string>();
-    List<int> datas = new List<int>();
-    foreach (dynamic item in orderByMonth)
-    {
-        labels.Add(item["CreatedMonth"]);
-        datas.Add(item.Count);
-    }
+    List<OrderByMonth> orderByMonth = ViewBag.OrderByMonth;
 }
 
 
@@ -40,8 +33,8 @@
                                         <th scope="row">@(i + 1)</th>
                                         <td>@products.ElementAt(i).Name</td>
                                         <td>@products.ElementAt(i).Price</td>
-                                        @*<td>@products.ElementAt(i).Producer.Name</td>
-                                        <td>@products.ElementAt(i).Category.Name</td>*@
+                                        <td>@products.ElementAt(i).Producer.Name</td>
+                                        <td>@products.ElementAt(i).Category.Name</td>
                                     </tr>
                                 }
                             }
@@ -57,13 +50,27 @@
         </div>
         <script crossorigin="anonymous">
             var ctx = document.getElementById("myChart").getContext('2d');
+            var monthNow = new Date().getMonth() + 1;
+            var lsLabels = [];
+            var lsDatas = [0,0,0,0,0, 0];
+
+            for (var i = 5; i >= 0; i--) {
+                lsLabels.push("T" + (monthNow - i <= 0 ? 12 - (monthNow - i): monthNow - i));
+            }
+
+            @foreach(var item in orderByMonth)
+            {
+                @:lsDatas.splice(0, 1);
+               @:lsDatas.push(@item.quantity);
+            }
+            console.log(lsDatas);
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    labels: lsLabels,
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        label: '# Số lượng đơn',
+                        data: lsDatas,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

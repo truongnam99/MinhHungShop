@@ -6,10 +6,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AdminApp.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using AdminApp.Areas.Identity.Services;
 
 namespace AdminApp
 {
@@ -22,27 +27,44 @@ namespace AdminApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {   
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            //services.AddScoped(provider => new DataAccess.Entities.MinhHungShopContext());
             services
                      .AddEntityFrameworkSqlServer()
                      .AddDbContext<DataAccess.Entities.MinhHungShopContext>((serviceProvider, options) =>
-                         options.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;")
+                         options.UseSqlServer("Server=DESKTOP-GISFHHL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;")
                                 .UseInternalServiceProvider(serviceProvider));
-            //services.AddEntityFrameworkSqlServer().AddDbContext<DataAccess.Entities.MinhHungShopContext>((serviceProvider, options) =>
-            //             options.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;")
-            //                    .UseInternalServiceProvider(serviceProvider));
-            //services.AddDbContext<DataAccess.Entities.MinhHungShopContext>(option => option.UseSqlServer("Server=DESKTOP-1GUJ3IL\\SQLEXPRESS;Database=MinhHungShop;Trusted_Connection=True;"));
-            //services.AddDbContext<DataAccess.Entities.MinhHungShopContext>(opt => opt.UseInMemoryDatabase("abc"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+                 services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<AdminAppContext>()
+                .AddDefaultTokenProviders();
+
+
+            services.AddMvc(options => {
+                options.Filters.Add(new AuthorizeFilter());
+
+            })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorPagesOptions(options =>
+            {
+                options.AllowAreas = true;
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            }); ;
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+            
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,13 +82,12 @@ namespace AdminApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Products}/{action=Index}/{id?}");
             });
         }
     }
